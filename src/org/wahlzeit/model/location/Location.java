@@ -1,5 +1,10 @@
 package org.wahlzeit.model.location;
 
+/**
+ * 
+ * @author Fabian Weilbrenner
+ *
+ */
 public interface Location {
 	
 	public boolean hasComponents();
