@@ -24,6 +24,8 @@ import java.util.*;
 import java.io.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.location.GPSLocation;
+import org.wahlzeit.model.location.MapcodeLocation;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 import org.wahlzeit.webparts.*;
@@ -76,6 +78,17 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 			user.addPhoto(photo); 
 			
 			photo.setTags(new Tags(tags));
+			
+			String locationType = us.getAsString(args, "locationType");
+			String locationString = us.getAsString(args, "location");
+			
+			if(!locationString.equals("")) {
+				if(locationType.equals("GPS")) {
+					photo.setLocation(new GPSLocation(locationString));
+				} else if(locationType.equals("MAPCODE")) {
+					photo.setLocation(new MapcodeLocation(locationString));
+				}
+			}			
 
 			pm.savePhoto(photo);
 

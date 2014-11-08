@@ -23,6 +23,7 @@ package org.wahlzeit.handlers;
 import java.util.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.location.Location;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 import org.wahlzeit.webparts.*;
@@ -58,6 +59,13 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
 		
 		String photoStatus = us.cfg().asValueString(photo.getStatus());
 		part.addString(Photo.STATUS, photoStatus);
+		
+		Location location = photo.getLocation();
+		if(location != null) {
+			part.addString(Photo.LOCATION, location.asString());
+		} else {
+			part.addString(Photo.LOCATION, "");
+		}
 
 		part.addString(Photo.UPLOADED_ON, us.cfg().asDateString(photo.getCreationTime()));
 		part.addString(Photo.LINK, HtmlUtil.asHref(getResourceAsRelativeHtmlPathString(id)));

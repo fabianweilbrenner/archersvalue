@@ -23,6 +23,9 @@ package org.wahlzeit.model;
 import java.sql.*;
 import java.net.*;
 
+import org.wahlzeit.model.location.GPSLocation;
+import org.wahlzeit.model.location.Location;
+import org.wahlzeit.model.location.MapcodeLocation;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 
@@ -47,6 +50,8 @@ public class Photo extends DataObject {
 	public static final String KEYWORDS = "keywords";
 
 	public static final String TAGS = "tags";
+	
+	public static final String LOCATION = "location";
 
 	public static final String STATUS = "status";
 	public static final String IS_INVISIBLE = "isInvisible";
@@ -90,6 +95,11 @@ public class Photo extends DataObject {
 	 * 
 	 */
 	protected Tags tags = Tags.EMPTY_TAGS;
+	
+	/**
+	 * 
+	 */
+	protected Location location = null;
 
 	/**
 	 * 
@@ -159,6 +169,16 @@ public class Photo extends DataObject {
 		height = rset.getInt("height");
 
 		tags = new Tags(rset.getString("tags"));
+		
+		String locationType = rset.getString("locationType");
+		
+		if(locationType.equals("MAPCODE")) {
+			location = new MapcodeLocation(rset.getString("location"));
+		} else if(locationType.equals("GPS")) {
+			location = new GPSLocation(rset.getString("location"));
+		} else {
+			location = null;
+		}
 
 		status = PhotoStatus.getFromInt(rset.getInt("status"));
 		praiseSum = rset.getInt("praise_sum");
@@ -183,6 +203,19 @@ public class Photo extends DataObject {
 		rset.updateInt("width", width);
 		rset.updateInt("height", height);
 		rset.updateString("tags", tags.asString());
+		
+		if(location == null) {
+			rset.updateString("location", "");
+			rset.updateString("locationType", "");
+		} else {
+			rset.updateString("location", location.asString());
+			if(location instanceof MapcodeLocation) {
+				rset.updateString("locationType", "MAPCODE");
+			} else if(location instanceof GPSLocation) {
+				rset.updateString("locationType", "GPS");
+			}
+		}
+		
 		rset.updateInt("status", status.asInt());
 		rset.updateInt("praise_sum", praiseSum);
 		rset.updateInt("no_votes", noVotes);
@@ -210,6 +243,22 @@ public class Photo extends DataObject {
 	 */
 	public int getOwnerId() {
 		return ownerId;
+	}
+	
+	/**
+	 * 
+	 * @methodtype get
+	 */
+	public Location getLocation() {
+		return location;
+	}
+	
+	/**
+	 * 
+	 * @methodtype set
+	 */
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	
 	/**
