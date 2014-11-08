@@ -1,10 +1,10 @@
 package org.wahlzeit.model.location;
 
+import java.util.List;
 import java.util.StringTokenizer;
 
+import com.mapcode.Mapcode;
 import com.mapcode.MapcodeCodec;
-import com.mapcode.Point;
-import com.mapcode.UnknownMapcodeException;
 
 /**
  * 
@@ -51,26 +51,26 @@ public class GPSLocation extends AbstractLocation {
 	/// Methods
 	///////////////////////////////////
 	@Override
-	protected void assertConvertTo(Location location) throws Exception {
-		if(!(location instanceof GPSLocation) && !(location instanceof MapcodeLocation)) {
+	protected void assertConvertTo(Class<?> classToConvert) throws Exception {
+		if (!Location.class.isAssignableFrom(classToConvert)) {
 			throw new Exception("Convertion Error");
 		}
 	}
 
 	@Override
-	protected Location doConvertTo(Location location) {
+	protected Location doConvertTo(Class<?> classToConvert) {
 		Location convertedLocation = null;
 		
-		if(location instanceof GPSLocation) {
-			convertedLocation = new GPSLocation((GPSLocation)location);
-		} else if(location instanceof MapcodeLocation) {
-			try {
-				Point p = MapcodeCodec.decode(location.asString());
-				convertedLocation = new GPSLocation(p.getLatDeg(), p.getLonDeg());
-			} catch (IllegalArgumentException | UnknownMapcodeException e) {
-				//e.printStackTrace();
+		if(classToConvert.equals(GPSLocation.class)) {
+			convertedLocation = new GPSLocation(this);
+		} else if(classToConvert.equals(MapcodeLocation.class)) {
+			double fComp = Double.parseDouble(getFirstComponent());
+			double sComp = Double.parseDouble(getSecondComponent());
+			List<Mapcode> mcList = MapcodeCodec.encode(fComp, sComp);
+			if(mcList.size() > 0) {
+				convertedLocation = new MapcodeLocation(mcList.get(0).asInternationalISO());
 			}
-		}
+		}	
 		
 		return convertedLocation;
 	}

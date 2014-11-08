@@ -20,7 +20,7 @@ public interface Location {
 	
 	public String getDelimiter();
 	
-	public Location convertTo(Location location);
+	public Location convertTo(Class<?> classToConvert);
 	
 	public String asString();
 

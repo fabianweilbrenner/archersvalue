@@ -55,12 +55,12 @@ public class MapcodeLocationTest extends TestCase {
 	}
 	
 	public void testConvertTo() {
-		GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
-		MapcodeLocation location2 = new MapcodeLocation("");
+		MapcodeLocation location1 = new MapcodeLocation("DEU QQH.MB");
 		
-		Location convertedLocation = location2.convertTo(location1);
+		Location convertedLocation = location1.convertTo(GPSLocation.class);
 		
-		assertEquals("DEU QQH.MB", convertedLocation.asString());
+		assertEquals(49.45052, Double.parseDouble(convertedLocation.getFirstComponent()), 0.0001);
+		assertEquals(11.08048, Double.parseDouble(convertedLocation.getSecondComponent()), 0.0001);
 	}
 	
 	public void testAsString() {
