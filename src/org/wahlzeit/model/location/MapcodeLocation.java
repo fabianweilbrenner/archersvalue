@@ -1,5 +1,6 @@
 package org.wahlzeit.model.location;
 
+import java.util.List;
 import java.util.StringTokenizer;
 
 import com.mapcode.Mapcode;
@@ -64,9 +65,12 @@ public class MapcodeLocation extends AbstractLocation {
 		Location convertedLocation = null;
 
 		if (location instanceof GPSLocation) {
-			Mapcode mapcode = MapcodeCodec.encodeToInternational(Double.parseDouble(getFirstComponent()),
-					Double.parseDouble(getSecondComponent()));
-			convertedLocation = new MapcodeLocation(mapcode.asLocal());
+			double fComp = Double.parseDouble(location.getFirstComponent());
+			double sComp = Double.parseDouble(location.getSecondComponent());
+			List<Mapcode> mcList = MapcodeCodec.encode(fComp, sComp);
+			if(mcList.size() > 0) {
+				convertedLocation = new MapcodeLocation(mcList.get(0).asInternationalISO());
+			}
 		} else if (location instanceof MapcodeLocation) {
 			convertedLocation = new MapcodeLocation((MapcodeLocation) location);
 		}

@@ -16,7 +16,7 @@ public class GPSLocation extends AbstractLocation {
 	///////////////////////////////////
 	/// Fields
 	///////////////////////////////////
-	private final String GPS_DELIMITER = " ";
+	private final String GPS_DELIMITER = ",";
 	
 	
 	///////////////////////////////////
@@ -80,8 +80,8 @@ public class GPSLocation extends AbstractLocation {
 		StringTokenizer strTokenizer = new StringTokenizer(locationString, GPS_DELIMITER);
 		
 		if(strTokenizer.countTokens() == 2) {
-			String latitude = strTokenizer.nextToken();
-			String longitude = strTokenizer.nextToken();
+			String latitude = strTokenizer.nextToken().trim();
+			String longitude = strTokenizer.nextToken().trim();
 			setComponents(latitude, longitude);
 		}
 	}

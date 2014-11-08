@@ -11,9 +11,9 @@ public abstract class AbstractLocation implements Location {
 	///////////////////////////////////
 	/// Fields
 	///////////////////////////////////
-	public String[] components;
-	public String context;
-	public String delimiter;
+	private String[] components;
+	private String context;
+	private String delimiter;
 	
 	
 	///////////////////////////////////
@@ -84,7 +84,7 @@ public abstract class AbstractLocation implements Location {
 			assertConvertTo(location);
 			return doConvertTo(location);
 		} catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -105,6 +105,11 @@ public abstract class AbstractLocation implements Location {
 	
 	private void initialize() {
 		components = new String[2];
+		
+		for(int i = 0; i < components.length; ++i) {
+			components[i] = "";
+		}
+		
 		context    = "";
 		delimiter  = "";
 	}
