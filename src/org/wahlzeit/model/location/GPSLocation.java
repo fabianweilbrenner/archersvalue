@@ -51,14 +51,14 @@ public class GPSLocation extends AbstractLocation {
 	/// Methods
 	///////////////////////////////////
 	@Override
-	protected void assertConvertTo(Class<?> classToConvert) throws Exception {
+	protected void assertConvertTo(Class<? extends Location> classToConvert) throws Exception {
 		if (!Location.class.isAssignableFrom(classToConvert)) {
 			throw new Exception("Convertion Error");
 		}
 	}
 
 	@Override
-	protected Location doConvertTo(Class<?> classToConvert) {
+	protected Location doConvertTo(Class<? extends Location> classToConvert) {
 		Location convertedLocation = null;
 		
 		if(classToConvert.equals(GPSLocation.class)) {

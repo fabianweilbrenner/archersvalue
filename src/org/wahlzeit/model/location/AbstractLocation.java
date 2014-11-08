@@ -27,8 +27,8 @@ public abstract class AbstractLocation implements Location {
 	///////////////////////////////////
 	/// Methods
 	///////////////////////////////////
-	protected abstract void assertConvertTo(Class<?> classToConvert) throws Exception;
-	protected abstract Location doConvertTo(Class<?> classToConvert);
+	protected abstract void assertConvertTo(Class<? extends Location> classToConvert) throws Exception;
+	protected abstract Location doConvertTo(Class<? extends Location> classToConvert);
 	
 	protected abstract void parseLocationString(String locationString);
 	
@@ -79,7 +79,7 @@ public abstract class AbstractLocation implements Location {
 		this.delimiter = delimiter;
 	}
 	
-	public Location convertTo(Class<?> classToConvert) {
+	public Location convertTo(Class<? extends Location> classToConvert) {
 		try {
 			assertConvertTo(classToConvert);
 			return doConvertTo(classToConvert);
