@@ -110,4 +110,14 @@ public class GPSLocationTest extends TestCase {
 		assertEquals("49.45052,11.08048", location3.asString());
 	}
 	
+	public void testIsEqual() {
+		GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
+		GPSLocation location2 = new GPSLocation("49.45052", "11.08048");
+		GPSLocation location3 = new GPSLocation("39.45052, 21.08048");
+		
+		assertTrue(location1.isEqual(location2));
+		assertFalse(location1.isEqual(location3));
+		
+	}
+	
 }

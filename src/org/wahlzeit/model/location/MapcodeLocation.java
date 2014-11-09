@@ -22,27 +22,47 @@ public class MapcodeLocation extends AbstractLocation {
 	///////////////////////////////////
 	/// Constructor
 	///////////////////////////////////
+	/**
+	 * 
+	 * @methodtype constructor
+	 */
 	public MapcodeLocation(MapcodeLocation mapcodeLocation) {
 		this(new String(mapcodeLocation.getContext()), 
 			 new String(mapcodeLocation.getFirstComponent()), 
 			 new String(mapcodeLocation.getSecondComponent()));
 	}
 	
+	/**
+	 * 
+	 * @methodtype constructor
+	 */
 	public MapcodeLocation(String mapcodeString) {
 		this();
 		parseLocationString(mapcodeString);
 	}
 	
+	/**
+	 * 
+	 * @methodtype constructor
+	 */
 	public MapcodeLocation(String leftComponent, String rightComponent) {
 		this("", leftComponent, rightComponent);
 	}
 	
+	/**
+	 * 
+	 * @methodtype constructor
+	 */
 	public MapcodeLocation(String context, String leftComponent, String rightComponent) {
 		this();
 		setContext(context);
 		setComponents(leftComponent, rightComponent);
 	}
 	
+	/**
+	 * 
+	 * @methodtype constructor
+	 */
 	private MapcodeLocation() {
 		super();
 		initialize();
@@ -52,7 +72,10 @@ public class MapcodeLocation extends AbstractLocation {
 	///////////////////////////////////
 	/// Methods
 	///////////////////////////////////
-	
+	/**
+	 * 
+	 * @methodtype assertion
+	 */
 	@Override
 	protected void assertConvertTo(Class<? extends Location> classToConvert) throws Exception {
 		if (!Location.class.isAssignableFrom(classToConvert)) {
@@ -60,6 +83,10 @@ public class MapcodeLocation extends AbstractLocation {
 		}
 	}
 
+	/**
+	 * 
+	 * @methodtype conversion
+	 */
 	@Override
 	protected Location doConvertTo(Class<? extends Location> classToConvert) {
 		Location convertedLocation = null;
@@ -78,6 +105,10 @@ public class MapcodeLocation extends AbstractLocation {
 		return convertedLocation;
 	}
 	
+	/**
+	 * 
+	 * @methodtype command
+	 */
 	@Override
 	protected void parseLocationString(String locationString) {
 		StringTokenizer strTokenizer = new StringTokenizer(locationString, " ");		
@@ -99,11 +130,19 @@ public class MapcodeLocation extends AbstractLocation {
 		}
 	}
 	
+	/**
+	 * 
+	 * @methodtype boolean query
+	 */
 	@Override
 	protected boolean areValidComponents(String[] components) {
 		return true;
 	}
 
+	/**
+	 * 
+	 * @methodtype initialization
+	 */
 	private void initialize() {
 		setDelimiter(MAPCODE_DELIMITER);
 	}

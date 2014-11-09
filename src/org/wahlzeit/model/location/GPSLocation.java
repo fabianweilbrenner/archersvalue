@@ -22,25 +22,45 @@ public class GPSLocation extends AbstractLocation {
 	///////////////////////////////////
 	/// Constructor
 	///////////////////////////////////
+	/**
+	 * 
+	 * @methodtype constructor
+	 */
 	public GPSLocation(GPSLocation gpsLocation) {
 		this(new String(gpsLocation.getFirstComponent()),
 			 new String(gpsLocation.getSecondComponent()));
 	}
 	
+	/**
+	 * 
+	 * @methodtype constructor
+	 */
 	public GPSLocation(String gpsString) {
 		this();
 		parseLocationString(gpsString);
 	}
 	
+	/**
+	 * 
+	 * @methodtype constructor
+	 */
 	public GPSLocation(double latitude, double longitude) {
 		this(""+latitude, ""+longitude);
 	}
 	
+	/**
+	 * 
+	 * @methodtype constructor
+	 */
 	public GPSLocation(String latitude, String longitude) {
 		this();
 		setComponents(latitude, longitude);
 	}
 	
+	/**
+	 * 
+	 * @methodtype constructor
+	 */
 	private GPSLocation() {
 		super();
 		initialize();
@@ -50,6 +70,10 @@ public class GPSLocation extends AbstractLocation {
 	///////////////////////////////////
 	/// Methods
 	///////////////////////////////////
+	/**
+	 * 
+	 * @methodtype assertion
+	 */
 	@Override
 	protected void assertConvertTo(Class<? extends Location> classToConvert) throws Exception {
 		if (!Location.class.isAssignableFrom(classToConvert)) {
@@ -57,6 +81,10 @@ public class GPSLocation extends AbstractLocation {
 		}
 	}
 
+	/**
+	 * 
+	 * @methodtype convertion
+	 */
 	@Override
 	protected Location doConvertTo(Class<? extends Location> classToConvert) {
 		Location convertedLocation = null;
@@ -75,6 +103,10 @@ public class GPSLocation extends AbstractLocation {
 		return convertedLocation;
 	}
 	
+	/**
+	 * 
+	 * @methodtype command
+	 */
 	@Override
 	protected void parseLocationString(String locationString) {
 		StringTokenizer strTokenizer = new StringTokenizer(locationString, GPS_DELIMITER);
@@ -86,6 +118,10 @@ public class GPSLocation extends AbstractLocation {
 		}
 	}
 	
+	/**
+	 * 
+	 * @methodtype boolean query
+	 */
 	@Override
 	protected boolean areValidComponents(String[] components) {
 		try {
@@ -97,6 +133,10 @@ public class GPSLocation extends AbstractLocation {
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @methodtype initialization
+	 */
 	private void initialize() {
 		setDelimiter(GPS_DELIMITER);
 	}
