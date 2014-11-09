@@ -86,6 +86,17 @@ public class GPSLocation extends AbstractLocation {
 		}
 	}
 	
+	@Override
+	protected boolean areValidComponents(String[] components) {
+		try {
+			Double.parseDouble(components[0]);
+			Double.parseDouble(components[1]);
+		} catch(Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
 	private void initialize() {
 		setDelimiter(GPS_DELIMITER);
 	}

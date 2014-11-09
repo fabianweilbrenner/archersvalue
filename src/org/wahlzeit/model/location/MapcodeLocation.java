@@ -98,6 +98,11 @@ public class MapcodeLocation extends AbstractLocation {
 			setComponents(leftComponent, rightComponent);
 		}
 	}
+	
+	@Override
+	protected boolean areValidComponents(String[] components) {
+		return true;
+	}
 
 	private void initialize() {
 		setDelimiter(MAPCODE_DELIMITER);

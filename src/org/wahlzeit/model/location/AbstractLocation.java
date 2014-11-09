@@ -32,6 +32,8 @@ public abstract class AbstractLocation implements Location {
 	
 	protected abstract void parseLocationString(String locationString);
 	
+	protected abstract boolean areValidComponents(String[] components);
+	
 	public boolean hasComponents() {
 		return (!components[0].equals("") && !components[1].equals(""));
 	}
@@ -49,14 +51,16 @@ public abstract class AbstractLocation implements Location {
 	}
 	
 	public void setComponents(String[] components) {
-		if(components.length == 2) {
+		if(components.length == 2 && areValidComponents(components)) {
 			this.components = components;
 		}		
 	}
 	
 	public void setComponents(String leftComponent, String rightComponent) {
-		this.components[0] = leftComponent;
-		this.components[1] = rightComponent;
+		String[] components = new String[] { leftComponent, rightComponent };
+		if(areValidComponents(components)) {
+			this.components = components;
+		}
 	}
 	
 	public boolean hasContext() {
