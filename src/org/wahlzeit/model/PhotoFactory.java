@@ -22,6 +22,7 @@ package org.wahlzeit.model;
 
 import java.sql.*;
 
+import org.wahlzeit.model.domain.ArcheryPhoto;
 import org.wahlzeit.services.*;
 
 /**
@@ -78,21 +79,24 @@ public class PhotoFactory {
 	 * @methodtype factory
 	 */
 	public Photo createPhoto() {
-		return new Photo();
+		//return new Photo();
+		return new ArcheryPhoto();
 	}
 	
 	/**
 	 * 
 	 */
 	public Photo createPhoto(PhotoId id) {
-		return new Photo(id);
+		//return new Photo(id);
+		return new ArcheryPhoto(id);
 	}
 	
 	/**
 	 * 
 	 */
 	public Photo createPhoto(ResultSet rs) throws SQLException {
-		return new Photo(rs);
+		//return new Photo(rs);
+		return new ArcheryPhoto(rs);
 	}
 	
 	/**

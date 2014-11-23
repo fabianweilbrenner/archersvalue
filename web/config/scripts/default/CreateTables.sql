@@ -28,6 +28,8 @@ CREATE TABLE photos (
 	tags text,
 	location text,
 	locationType text,
+	bowCategory text,
+	competitionCategory text,
 	status integer,
 	praise_sum integer,
 	no_votes integer,
