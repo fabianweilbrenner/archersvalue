@@ -82,6 +82,10 @@ public final class CompetitionCategory extends AbstractCategory {
 		return name + ": " + competitionCategory.getName();
 	}
 	
+	public String categoryNameAsString() {
+		return competitionCategory.getName();
+	}
+	
 	protected void assertInvariants() {
 		super.assertInvariants();
 		assert competitionCategory != null;
@@ -95,5 +99,6 @@ public final class CompetitionCategory extends AbstractCategory {
 	private void initialize() {
 		
 	}
+
 
 }

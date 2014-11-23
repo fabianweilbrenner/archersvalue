@@ -24,6 +24,11 @@ import java.util.*;
 import java.io.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.domain.ArcheryPhoto;
+import org.wahlzeit.model.domain.BowCategories;
+import org.wahlzeit.model.domain.BowCategory;
+import org.wahlzeit.model.domain.CompetitionCategories;
+import org.wahlzeit.model.domain.CompetitionCategory;
 import org.wahlzeit.model.location.GPSLocation;
 import org.wahlzeit.model.location.MapcodeLocation;
 import org.wahlzeit.services.*;
@@ -70,6 +75,31 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 			String sourceFileName = us.getAsString(args, "fileName");
 			File file = new File(sourceFileName);
 			Photo photo = pm.createPhoto(file);
+			
+			
+			if(photo instanceof ArcheryPhoto) {
+				ArcheryPhoto archPhoto = (ArcheryPhoto)photo;
+				
+				String bowCatString = us.getAsString(args, "bowCategory");
+				String compCatString = us.getAsString(args, "competitionCategory");
+				
+				BowCategory bowCat = null;
+				CompetitionCategory compCat = null;
+				
+				bowCat = new BowCategory(BowCategories.valueOf(bowCatString));
+				
+				compCatString = compCatString.replace(" ", "");
+				compCat = new CompetitionCategory(CompetitionCategories.valueOf(compCatString));
+				
+				if(bowCat != null) {
+					archPhoto.setBowCategory(bowCat);
+				}
+				
+				if(compCat != null) {
+					archPhoto.setCompetitionCategory(compCat);
+				}
+				
+			}
 			
 
 			String targetFileName = SysConfig.getBackupDir().asString() + photo.getId().asString();

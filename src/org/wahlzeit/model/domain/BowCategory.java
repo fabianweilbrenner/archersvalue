@@ -81,6 +81,10 @@ public final class BowCategory extends AbstractCategory {
 		return name + ": " + bowCategory.getName();
 	}
 	
+	public String categoryNameAsString() {
+		return bowCategory.getName();
+	}
+	
 	protected void assertInvariants() {
 		super.assertInvariants();
 		assert bowCategory != null;
@@ -97,5 +101,7 @@ public final class BowCategory extends AbstractCategory {
 		//postcondition
 		assert bowCategory != null;
 	}
+
+	
 
 }

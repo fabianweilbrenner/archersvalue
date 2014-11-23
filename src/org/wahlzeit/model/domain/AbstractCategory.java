@@ -41,6 +41,7 @@ public abstract class AbstractCategory {
 	 * @methodtype convertion
 	 */
 	public abstract String asString();
+	public abstract String categoryNameAsString();
 
 	/**
 	 * Getter method of the name of the category

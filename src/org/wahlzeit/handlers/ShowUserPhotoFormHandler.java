@@ -23,6 +23,7 @@ package org.wahlzeit.handlers;
 import java.util.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.domain.ArcheryPhoto;
 import org.wahlzeit.model.location.Location;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
@@ -59,6 +60,13 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
 		
 		String photoStatus = us.cfg().asValueString(photo.getStatus());
 		part.addString(Photo.STATUS, photoStatus);
+		
+		if(photo instanceof ArcheryPhoto) {
+			ArcheryPhoto archPhoto = (ArcheryPhoto)photo;
+			part.addString(ArcheryPhoto.BOW_CATEGORY, archPhoto.getBowCategory().categoryNameAsString());
+			part.addString(ArcheryPhoto.COMPETITION_CATEGORY, archPhoto.getCompetitionCategory().categoryNameAsString());
+		}
+		
 		
 		Location location = photo.getLocation();
 		if(location != null) {

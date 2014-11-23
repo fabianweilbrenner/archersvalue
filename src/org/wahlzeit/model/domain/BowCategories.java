@@ -5,7 +5,7 @@ public enum BowCategories {
 	Recurve("Recurve"),
 	Compound("Compound"),
 	Longbow("Longbow"),
-	Other("Category");
+	Other("Other");
 	
 	private String name;
 	
@@ -21,4 +21,5 @@ public enum BowCategories {
 	private void assertInvariants() {
 		assert name != null;
 	}
+	
 }

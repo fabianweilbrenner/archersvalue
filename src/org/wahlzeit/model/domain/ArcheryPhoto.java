@@ -50,8 +50,6 @@ public class ArcheryPhoto extends Photo {
 	 */
 	public ArcheryPhoto(ResultSet resultSet) throws SQLException {
 		super(resultSet);
-		
-		initialize();
 	}
 
 
