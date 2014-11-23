@@ -23,6 +23,7 @@ package org.wahlzeit.handlers;
 import java.util.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.domain.ArcheryPhoto;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 import org.wahlzeit.webparts.*;
@@ -163,6 +164,17 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
 			
 		WebPart caption = createWebPart(us, PartUtil.CAPTION_INFO_FILE);
 		caption.addString(Photo.CAPTION, getPhotoCaption(us, photo));
+		
+		if(photo.getLocation() != null) {
+			caption.addString(Photo.LOCATION, photo.getLocation().asString());
+		}
+		
+		if(photo instanceof ArcheryPhoto) {
+			ArcheryPhoto archPhoto = (ArcheryPhoto)photo;
+			caption.addString(ArcheryPhoto.BOW_CATEGORY, archPhoto.getBowCategory().categoryNameAsString());
+			caption.addString(ArcheryPhoto.COMPETITION_CATEGORY, archPhoto.getCompetitionCategory().categoryNameAsString());
+		}
+		
 		page.addWritable(Photo.CAPTION, caption);
 	}
 
