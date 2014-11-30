@@ -18,9 +18,13 @@ public class ArcheryPhoto extends Photo {
 	///////////////////////////////////
 	public static final String BOW_CATEGORY = "bowCategory";
 	public static final String COMPETITION_CATEGORY = "competitionCategory";
+	public static final String DRAW_WEIGHT_VALUE = "drawWeightValue";
+	public static final String DRAW_WEIGHT_UNIT = "drawWeightUnit";
+	public static final String DRAW_WEIGHT = "drawWeight";
 	
 	protected BowCategory bowCategory;
 	protected CompetitionCategory competitionCategory;
+	protected DrawWeight drawWeight;
 
 
 	///////////////////////////////////
@@ -117,14 +121,48 @@ public class ArcheryPhoto extends Photo {
 	}
 	
 	/**
+	 * Getter method of the draw weight
+	 * 
+	 * @return the draw weight
+	 * @methodtype get
+	 */
+	public DrawWeight getDrawWeight() {
+		//precondition
+		assert drawWeight != null;
+		
+		return drawWeight;
+	}
+	
+	/**
+	 * Setter method of the draw weight
+	 * 
+	 * @methodtype set
+	 */
+	public void setDrawWeight(DrawWeight drawWeight) {
+		//precondition
+		assert drawWeight != null;
+		
+		this.drawWeight = drawWeight;
+		incWriteCount();
+		
+		//postcondition
+		assert this.drawWeight != null;
+	}
+	
+	/**
 	 * @throws SQLException 
 	 * 
 	 */
 	public void readFrom(ResultSet rset) throws SQLException {
 		super.readFrom(rset);
 		
-		bowCategory = new BowCategory(BowCategories.valueOf(rset.getString(BOW_CATEGORY)));
-		competitionCategory = new CompetitionCategory(CompetitionCategories.valueOf(rset.getString(COMPETITION_CATEGORY)));
+		bowCategory = BowCategory.getFromInt(rset.getInt(BOW_CATEGORY));
+		competitionCategory = CompetitionCategory.getFromInt(rset.getInt(COMPETITION_CATEGORY));
+		
+		int drawWeightValue = rset.getInt(DRAW_WEIGHT_VALUE);
+		int drawWeightUnitAsInt = rset.getInt(DRAW_WEIGHT_UNIT);
+		
+		drawWeight = DrawWeight.getInstance(drawWeightValue, DrawWeight.Units.getFromInt(drawWeightUnitAsInt));
 	}
 	
 	/**
@@ -133,21 +171,24 @@ public class ArcheryPhoto extends Photo {
 	public void writeOn(ResultSet rset) throws SQLException {
 		super.writeOn(rset);
 		
-		rset.updateString(BOW_CATEGORY, bowCategory.getBowCategory().toString());
-		rset.updateString(COMPETITION_CATEGORY, competitionCategory.getCompetitionCategory().toString());
+		rset.updateInt(BOW_CATEGORY, bowCategory.asInt());
+		rset.updateInt(COMPETITION_CATEGORY, competitionCategory.asInt());
+		rset.updateInt(DRAW_WEIGHT_VALUE, drawWeight.getValue());
+		rset.updateInt(DRAW_WEIGHT_UNIT, drawWeight.getUnit().asInt());
 	}
 	
 	private void assertInvariants() {
 		assert bowCategory != null;
 		assert competitionCategory != null;
+		assert drawWeight != null;
 	}
 	
 	/**
 	 * @methodtype initialization
 	 */
 	private void initialize() {
-		bowCategory = new BowCategory();
-		competitionCategory = new CompetitionCategory();
+		bowCategory = BowCategory.Other;
+		competitionCategory = CompetitionCategory.Other;
 		
 		assertInvariants();
 		

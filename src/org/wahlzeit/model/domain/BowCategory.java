@@ -1,107 +1,66 @@
 package org.wahlzeit.model.domain;
 
+
 /**
  * 
  * @author Fabian Weilbrenner
  *
  */
-public final class BowCategory extends AbstractCategory {
+public enum BowCategory implements Category {
 	
-	///////////////////////////////////
-	/// Fields
-	///////////////////////////////////
-	private BowCategories bowCategory;
-
-	///////////////////////////////////
-	/// Constructor
-	///////////////////////////////////
-	/**
-	 * @methodtype constructor
-	 */
-	public BowCategory() {
-		this(BowCategories.Other);
-	}
-
-	/**
-	 * @methodtype constructor
-	 */
-	public BowCategory(BowCategories bowCategory) {
-		super("Bow Category");
-		initialize();
-		
-		this.bowCategory = bowCategory;
-		
-		assertInvariants();
-	}
-
-	///////////////////////////////////
-	/// Methods
-	///////////////////////////////////
-	/**
-	 * Getter method of the bow category
-	 * 
-	 * @return the bow category
-	 * @methodtype get
-	 */
-	public BowCategories getBowCategory() {
-		//precondition
-		assert bowCategory != null;
-		
-		return bowCategory;
+	Recurve(0, "Recurve"),
+	Compound(1, "Compound"),
+	Longbow(2, "Longbow"),
+	Other(3, "Other");
+	
+	private final String name;
+	private final int intValue;
+	
+	BowCategory(int intValue, String name) {
+		this.intValue = intValue;
+		this.name = name;
 	}
 	
-	/**
-	 * Setter method of the bow category
-	 * 
-	 * @param bowCategory bow category to be set
-	 * @methodtype set
-	 */
-	public void setBowCategory(BowCategories bowCategory) {
-		//precondition
-		assert bowCategory != null;
+	public static BowCategory getFromInt(int intValue) {
+		BowCategory[] categories = values();
+		for(int i = 0; i < categories.length; ++i) {
+			if(categories[i].asInt() == intValue) {
+				return categories[i];
+			}
+		}
 		
-		this.bowCategory = bowCategory;
-		
-		//postcondition
-		assert this.bowCategory != null;
-		assert this.bowCategory == bowCategory;
+		return Other;
 	}
 	
-	/**
-	 * This methods returns a human readable expression of the category
-	 * 
-	 * @return human readable expression of the category
-	 * @methodtype convertion
-	 */
+	public static BowCategory getFromString(String name) {
+		BowCategory[] categories = values();
+		for(int i = 0; i < categories.length; ++i) {
+			if(categories[i].getTypeName().equals(name)) {
+				return categories[i];
+			}
+		}
+		
+		return Other;
+	}
+
+	@Override
 	public String asString() {
-		//precondition
-		assert name != null;
-		assert bowCategory != null;
-		
-		return name + ": " + bowCategory.getName();
-	}
-	
-	public String categoryNameAsString() {
-		return bowCategory.getName();
-	}
-	
-	protected void assertInvariants() {
-		super.assertInvariants();
-		assert bowCategory != null;
-	}
-	
-	/**
-	 * Initializes the fields with default values
-	 * 
-	 * @methodtype initialization
-	 */
-	private void initialize() {
-		bowCategory = BowCategories.Other;
-		
-		//postcondition
-		assert bowCategory != null;
+		return "BowCategory: " + name;
 	}
 
-	
+	@Override
+	public int asInt() {
+		return intValue;
+	}
 
+	@Override
+	public BowCategory[] getAllValues() {
+		return values();
+	}
+
+	@Override
+	public String getTypeName() {
+		return name;
+	}
+	
 }

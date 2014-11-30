@@ -25,10 +25,9 @@ import java.io.*;
 
 import org.wahlzeit.model.*;
 import org.wahlzeit.model.domain.ArcheryPhoto;
-import org.wahlzeit.model.domain.BowCategories;
 import org.wahlzeit.model.domain.BowCategory;
-import org.wahlzeit.model.domain.CompetitionCategories;
 import org.wahlzeit.model.domain.CompetitionCategory;
+import org.wahlzeit.model.domain.DrawWeight;
 import org.wahlzeit.model.location.GPSLocation;
 import org.wahlzeit.model.location.MapcodeLocation;
 import org.wahlzeit.services.*;
@@ -80,24 +79,23 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 			if(photo instanceof ArcheryPhoto) {
 				ArcheryPhoto archPhoto = (ArcheryPhoto)photo;
 				
-				String bowCatString = us.getAsString(args, "bowCategory");
-				String compCatString = us.getAsString(args, "competitionCategory");
 				
-				BowCategory bowCat = null;
-				CompetitionCategory compCat = null;
+				BowCategory bowCat = BowCategory.getFromString(us.getAsString(args, "bowCategory"));
+				CompetitionCategory compCat = CompetitionCategory.getFromString(us.getAsString(args, "competitionCategory"));
 				
-				bowCat = new BowCategory(BowCategories.valueOf(bowCatString));
-				
-				compCatString = compCatString.replace(" ", "");
-				compCat = new CompetitionCategory(CompetitionCategories.valueOf(compCatString));
-				
-				if(bowCat != null) {
-					archPhoto.setBowCategory(bowCat);
+				String drawWeightUnit = us.getAsString(args, "drawWeightUnit");
+				int drawWeightValue;
+				try {
+					drawWeightValue = Integer.parseInt(us.getAsString(args, "drawWeightValue"));
+				} catch(Exception e) {
+					drawWeightValue = 0;
 				}
 				
-				if(compCat != null) {
-					archPhoto.setCompetitionCategory(compCat);
-				}
+				DrawWeight drawWeight = DrawWeight.getInstance(drawWeightValue, DrawWeight.Units.getFromString(drawWeightUnit));
+				
+				archPhoto.setBowCategory(bowCat);
+				archPhoto.setCompetitionCategory(compCat);
+				archPhoto.setDrawWeight(drawWeight);
 				
 			}
 			
