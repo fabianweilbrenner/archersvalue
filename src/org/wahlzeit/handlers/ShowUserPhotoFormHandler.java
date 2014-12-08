@@ -63,9 +63,9 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
 		
 		if(photo instanceof ArcheryPhoto) {
 			ArcheryPhoto archPhoto = (ArcheryPhoto)photo;
-			part.addString(ArcheryPhoto.BOW_CATEGORY, archPhoto.getBowCategory().getTypeName());
-			part.addString(ArcheryPhoto.COMPETITION_CATEGORY, archPhoto.getCompetitionCategory().getTypeName());
-			part.addString(ArcheryPhoto.DRAW_WEIGHT, archPhoto.getDrawWeight().asString());
+			part.addString(ArcheryPhoto.BOW_CATEGORY, archPhoto.getArchery().getBowCategory().getTypeName());
+			part.addString(ArcheryPhoto.COMPETITION_CATEGORY, archPhoto.getArchery().getCompetitionCategory().getTypeName());
+			part.addString(ArcheryPhoto.DRAW_WEIGHT, archPhoto.getArchery().getDrawWeight().asString());
 		}
 		
 		

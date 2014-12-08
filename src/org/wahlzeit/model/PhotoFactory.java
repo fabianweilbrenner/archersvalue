@@ -79,24 +79,21 @@ public class PhotoFactory {
 	 * @methodtype factory
 	 */
 	public Photo createPhoto() {
-		//return new Photo();
-		return new ArcheryPhoto();
+		return new Photo();
 	}
 	
 	/**
 	 * 
 	 */
 	public Photo createPhoto(PhotoId id) {
-		//return new Photo(id);
-		return new ArcheryPhoto(id);
+		return new Photo(id);
 	}
 	
 	/**
 	 * 
 	 */
 	public Photo createPhoto(ResultSet rs) throws SQLException {
-		//return new Photo(rs);
-		return new ArcheryPhoto(rs);
+		return new Photo(rs);
 	}
 	
 	/**

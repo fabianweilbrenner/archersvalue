@@ -1,7 +1,5 @@
 package org.wahlzeit.model.domain;
 
-import java.util.HashMap;
-
 /**
  * 
  * @author Fabian Weilbrenner
@@ -55,8 +53,6 @@ public class DrawWeight {
 	///////////////////////////////////
 	/// Fields
 	///////////////////////////////////
-	private static HashMap<String, DrawWeight> instances = new HashMap<String, DrawWeight>();
-
 	private final Units unit;
 	private final int value;
 
@@ -67,7 +63,7 @@ public class DrawWeight {
 	/**
 	 * @methodtype constructor
 	 */
-	private DrawWeight(int value, Units unit) {
+	protected DrawWeight(int value, Units unit) {
 		this.value = value;
 		this.unit  = unit;
 	}
@@ -76,30 +72,6 @@ public class DrawWeight {
 	///////////////////////////////////
 	/// Methods
 	///////////////////////////////////
-	/**
-	 * Returns an existings instance of the DrawWeight object. If there isn't an existing one, it creates a new one.
-	 * 
-	 * @param value represents the integer value
-	 * @param unit represents the unit
-	 * @return return an instance of the DrawWeight class
-	 */
-	public static DrawWeight getInstance(int value, Units unit) {
-		//postcondition
-		assert unit != null;
-		assert value >= 0;
-		
-		String key = asString(value, unit);
-
-		DrawWeight instance = null;
-		if(instances.containsKey(key)) {
-			instance = instances.get(key);
-		} else {
-			instance = new DrawWeight(value, unit);
-			instances.put(key, instance);
-		}
-
-		return instance;
-	}
 
 	/**
 	 * Returns the unit of the value object
@@ -131,7 +103,7 @@ public class DrawWeight {
 		return asString(value, unit);
 	}
 
-	private static String asString(int value, Units unit) {
+	public static String asString(int value, Units unit) {
 		return value + " " + unit.getShortTerm();
 	}
 

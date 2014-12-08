@@ -22,9 +22,7 @@ public class ArcheryPhoto extends Photo {
 	public static final String DRAW_WEIGHT_UNIT = "drawWeightUnit";
 	public static final String DRAW_WEIGHT = "drawWeight";
 	
-	protected BowCategory bowCategory;
-	protected CompetitionCategory competitionCategory;
-	protected DrawWeight drawWeight;
+	private Archery archery;
 
 
 	///////////////////////////////////
@@ -61,92 +59,24 @@ public class ArcheryPhoto extends Photo {
 	/// Methods
 	///////////////////////////////////
 	/**
-	 * Getter method of the bow category
+	 * Getter method of the domain class
 	 * 
-	 * @return the bow category
+	 * @return the domain class
 	 * @methodtype get
 	 */
-	public BowCategory getBowCategory() {
-		//precondition
-		assert bowCategory != null;
-		
-		return bowCategory;
+	public Archery getArchery() {
+		return archery;
 	}
 	
 	/**
-	 * Setter method of the bow category
+	 * Setter method of the domain class
 	 * 
+	 * @param archery domain class to be set
 	 * @methodtype set
 	 */
-	public void setBowCategory(BowCategory bowCategory) {
-		//precondition
-		assert bowCategory != null;
-		
-		this.bowCategory = bowCategory;
+	public void setArchery(Archery archery) {
+		this.archery = archery;
 		incWriteCount();
-		
-		//postcondition
-		assert this.bowCategory != null;
-		assert this.bowCategory == bowCategory;
-	}
-	
-	/**
-	 * Getter method of the competition category
-	 * 
-	 * @return the competition category
-	 * @methodtype get
-	 */
-	public CompetitionCategory getCompetitionCategory() {
-		//precondition
-		assert competitionCategory != null;
-		
-		return competitionCategory;
-	}
-	
-	/**
-	 * Setter method of the competition category
-	 * 
-	 * @methodtype set
-	 */
-	public void setCompetitionCategory(CompetitionCategory competitionCategory) {
-		//precondition
-		assert competitionCategory != null;
-		
-		this.competitionCategory = competitionCategory;
-		incWriteCount();
-		
-		//postcondition
-		assert this.competitionCategory != null;
-		assert this.competitionCategory == competitionCategory;
-	}
-	
-	/**
-	 * Getter method of the draw weight
-	 * 
-	 * @return the draw weight
-	 * @methodtype get
-	 */
-	public DrawWeight getDrawWeight() {
-		//precondition
-		assert drawWeight != null;
-		
-		return drawWeight;
-	}
-	
-	/**
-	 * Setter method of the draw weight
-	 * 
-	 * @methodtype set
-	 */
-	public void setDrawWeight(DrawWeight drawWeight) {
-		//precondition
-		assert drawWeight != null;
-		
-		this.drawWeight = drawWeight;
-		incWriteCount();
-		
-		//postcondition
-		assert this.drawWeight != null;
 	}
 	
 	/**
@@ -156,13 +86,15 @@ public class ArcheryPhoto extends Photo {
 	public void readFrom(ResultSet rset) throws SQLException {
 		super.readFrom(rset);
 		
-		bowCategory = BowCategory.getFromInt(rset.getInt(BOW_CATEGORY));
-		competitionCategory = CompetitionCategory.getFromInt(rset.getInt(COMPETITION_CATEGORY));
+		BowCategory bowCategory = ArcheryFactory.getInstance().createBowCategory(rset.getInt(BOW_CATEGORY));
+		CompetitionCategory competitionCategory = ArcheryFactory.getInstance().createCompetitionCategory(rset.getInt(COMPETITION_CATEGORY));
 		
 		int drawWeightValue = rset.getInt(DRAW_WEIGHT_VALUE);
 		int drawWeightUnitAsInt = rset.getInt(DRAW_WEIGHT_UNIT);
 		
-		drawWeight = DrawWeight.getInstance(drawWeightValue, DrawWeight.Units.getFromInt(drawWeightUnitAsInt));
+		DrawWeight drawWeight = ArcheryFactory.getInstance().createDrawWeight(drawWeightValue, DrawWeight.Units.getFromInt(drawWeightUnitAsInt));
+		
+		archery = new Archery(bowCategory, competitionCategory, drawWeight);
 	}
 	
 	/**
@@ -171,24 +103,21 @@ public class ArcheryPhoto extends Photo {
 	public void writeOn(ResultSet rset) throws SQLException {
 		super.writeOn(rset);
 		
-		rset.updateInt(BOW_CATEGORY, bowCategory.asInt());
-		rset.updateInt(COMPETITION_CATEGORY, competitionCategory.asInt());
-		rset.updateInt(DRAW_WEIGHT_VALUE, drawWeight.getValue());
-		rset.updateInt(DRAW_WEIGHT_UNIT, drawWeight.getUnit().asInt());
+		rset.updateInt(BOW_CATEGORY, archery.bowCategory.asInt());
+		rset.updateInt(COMPETITION_CATEGORY, archery.competitionCategory.asInt());
+		rset.updateInt(DRAW_WEIGHT_VALUE, archery.drawWeight.getValue());
+		rset.updateInt(DRAW_WEIGHT_UNIT, archery.drawWeight.getUnit().asInt());
 	}
 	
 	private void assertInvariants() {
-		assert bowCategory != null;
-		assert competitionCategory != null;
-		assert drawWeight != null;
+		assert archery != null;
 	}
 	
 	/**
 	 * @methodtype initialization
 	 */
 	private void initialize() {
-		bowCategory = BowCategory.Other;
-		competitionCategory = CompetitionCategory.Other;
+		archery = new Archery();
 		
 		assertInvariants();
 		

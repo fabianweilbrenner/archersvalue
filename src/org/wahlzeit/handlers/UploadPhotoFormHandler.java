@@ -24,6 +24,8 @@ import java.util.*;
 import java.io.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.domain.Archery;
+import org.wahlzeit.model.domain.ArcheryFactory;
 import org.wahlzeit.model.domain.ArcheryPhoto;
 import org.wahlzeit.model.domain.BowCategory;
 import org.wahlzeit.model.domain.CompetitionCategory;
@@ -79,10 +81,6 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 			if(photo instanceof ArcheryPhoto) {
 				ArcheryPhoto archPhoto = (ArcheryPhoto)photo;
 				
-				
-				BowCategory bowCat = BowCategory.getFromString(us.getAsString(args, "bowCategory"));
-				CompetitionCategory compCat = CompetitionCategory.getFromString(us.getAsString(args, "competitionCategory"));
-				
 				String drawWeightUnit = us.getAsString(args, "drawWeightUnit");
 				int drawWeightValue;
 				try {
@@ -91,12 +89,15 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 					drawWeightValue = 0;
 				}
 				
-				DrawWeight drawWeight = DrawWeight.getInstance(drawWeightValue, DrawWeight.Units.getFromString(drawWeightUnit));
+				ArcheryFactory factory = ArcheryFactory.getInstance();
 				
-				archPhoto.setBowCategory(bowCat);
-				archPhoto.setCompetitionCategory(compCat);
-				archPhoto.setDrawWeight(drawWeight);
+				BowCategory bowCat = factory.createBowCategory(us.getAsString(args, "bowCategory"));
+				CompetitionCategory compCat = factory.createCompetitionCategory(us.getAsString(args, "competitionCategory"));
+				DrawWeight drawWeight = ArcheryFactory.getInstance().createDrawWeight(drawWeightValue, DrawWeight.Units.getFromString(drawWeightUnit));
+		
+				Archery archery = factory.createArcheryObject(bowCat, compCat, drawWeight);
 				
+				archPhoto.setArchery(archery);				
 			}
 			
 
