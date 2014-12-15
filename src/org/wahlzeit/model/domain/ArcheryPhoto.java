@@ -5,6 +5,8 @@ import java.sql.SQLException;
 
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoId;
+import org.wahlzeit.model.domain.bow.Bow;
+import org.wahlzeit.model.domain.bow.BowManager;
 
 /**
  * 
@@ -21,6 +23,7 @@ public class ArcheryPhoto extends Photo {
 	public static final String DRAW_WEIGHT_VALUE = "drawWeightValue";
 	public static final String DRAW_WEIGHT_UNIT = "drawWeightUnit";
 	public static final String DRAW_WEIGHT = "drawWeight";
+	public static final String BOW = "bow";
 	
 	private Archery archery;
 
@@ -92,9 +95,12 @@ public class ArcheryPhoto extends Photo {
 		int drawWeightValue = rset.getInt(DRAW_WEIGHT_VALUE);
 		int drawWeightUnitAsInt = rset.getInt(DRAW_WEIGHT_UNIT);
 		
+		int bowId = rset.getInt(BOW);
+		Bow bow = BowManager.getInstance().getBowFromId(bowId);
+		
 		DrawWeight drawWeight = ArcheryFactory.getInstance().createDrawWeight(drawWeightValue, DrawWeight.Units.getFromInt(drawWeightUnitAsInt));
 		
-		archery = new Archery(bowCategory, competitionCategory, drawWeight);
+		archery = ArcheryFactory.getInstance().createArcheryObject(bowCategory, competitionCategory, drawWeight, bow);
 	}
 	
 	/**
@@ -107,6 +113,7 @@ public class ArcheryPhoto extends Photo {
 		rset.updateInt(COMPETITION_CATEGORY, archery.competitionCategory.asInt());
 		rset.updateInt(DRAW_WEIGHT_VALUE, archery.drawWeight.getValue());
 		rset.updateInt(DRAW_WEIGHT_UNIT, archery.drawWeight.getUnit().asInt());
+		rset.updateInt(BOW, archery.getBow().getId());
 	}
 	
 	private void assertInvariants() {

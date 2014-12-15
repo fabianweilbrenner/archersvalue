@@ -25,6 +25,8 @@ import java.io.FileFilter;
 import java.sql.*;
 
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.domain.bow.BowManager;
+import org.wahlzeit.model.domain.bow.BowTypeManager;
 import org.wahlzeit.services.*;
 import org.wahlzeit.servlets.AbstractServlet;
 import org.wahlzeit.webparts.*;
@@ -185,7 +187,9 @@ public abstract class ModelMain extends AbstractMain {
 		PhotoCaseManager.getInstance().savePhotoCases();
 		PhotoManager.getInstance().savePhotos();			
 		UserManager.getInstance().saveUsers();
-
+		BowManager.getInstance().saveBows();
+		BowTypeManager.getInstance().saveBowTypes();
+		
 		saveGlobals();
 	}
 	

@@ -1,5 +1,7 @@
 package org.wahlzeit.model.domain;
 
+import org.wahlzeit.model.domain.bow.Bow;
+
 public class Archery {
 
 
@@ -9,6 +11,7 @@ public class Archery {
 	protected final BowCategory bowCategory;
 	protected final CompetitionCategory competitionCategory;
 	protected final DrawWeight drawWeight;
+	protected final Bow bow;
 
 
 	///////////////////////////////////
@@ -18,16 +21,20 @@ public class Archery {
 	 * @methodtype constructor
 	 */
 	protected Archery() {
-		this(BowCategory.Other, CompetitionCategory.Other, ArcheryFactory.getInstance().createDrawWeight(0, DrawWeight.Units.LBS));
+		this(BowCategory.Other, 
+		     CompetitionCategory.Other, 
+		     ArcheryFactory.getInstance().createDrawWeight(0, DrawWeight.Units.LBS),
+		     null);
 	}
 	
 	/**
 	 * @methodtype constructor
 	 */
-	protected Archery(BowCategory bowCategory, CompetitionCategory competitionCategory, DrawWeight drawWeight) {
+	protected Archery(BowCategory bowCategory, CompetitionCategory competitionCategory, DrawWeight drawWeight, Bow bow) {
 		this.bowCategory 		 = bowCategory;
 		this.competitionCategory = competitionCategory;
 		this.drawWeight			 = drawWeight;
+		this.bow 				 = bow;
 		
 		assertInvariants();
 	}
@@ -54,6 +61,16 @@ public class Archery {
 	 */
 	public CompetitionCategory getCompetitionCategory() {
 		return competitionCategory;
+	}
+	
+	/**
+	 * Getter method of the bow
+	 * 
+	 * @return the bow
+	 * @methodtype get
+	 */
+	public Bow getBow() {
+		return bow;
 	}
 
 	/**

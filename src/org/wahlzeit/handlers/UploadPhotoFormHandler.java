@@ -30,6 +30,10 @@ import org.wahlzeit.model.domain.ArcheryPhoto;
 import org.wahlzeit.model.domain.BowCategory;
 import org.wahlzeit.model.domain.CompetitionCategory;
 import org.wahlzeit.model.domain.DrawWeight;
+import org.wahlzeit.model.domain.bow.Bow;
+import org.wahlzeit.model.domain.bow.BowManager;
+import org.wahlzeit.model.domain.bow.BowType;
+import org.wahlzeit.model.domain.bow.BowTypeManager;
 import org.wahlzeit.model.location.GPSLocation;
 import org.wahlzeit.model.location.MapcodeLocation;
 import org.wahlzeit.services.*;
@@ -93,9 +97,19 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 				
 				BowCategory bowCat = factory.createBowCategory(us.getAsString(args, "bowCategory"));
 				CompetitionCategory compCat = factory.createCompetitionCategory(us.getAsString(args, "competitionCategory"));
-				DrawWeight drawWeight = ArcheryFactory.getInstance().createDrawWeight(drawWeightValue, DrawWeight.Units.getFromString(drawWeightUnit));
+				DrawWeight drawWeight = factory.createDrawWeight(drawWeightValue, DrawWeight.Units.getFromString(drawWeightUnit));
 		
-				Archery archery = factory.createArcheryObject(bowCat, compCat, drawWeight);
+				BowType bowType = factory.createBowType(us.getAsString(args, "manufacturer"), 
+														us.getAsString(args, "riser"), 
+														us.getAsString(args, "limbs"));
+				BowTypeManager.getInstance().addBowType(bowType);
+				BowTypeManager.getInstance().saveBowType(bowType);
+				
+				Bow bow = factory.createBow(bowType, Integer.parseInt(us.getAsString(args, "constructionYear")));
+				BowManager.getInstance().addBow(bow);
+				BowManager.getInstance().saveBow(bow);
+				
+				Archery archery = factory.createArcheryObject(bowCat, compCat, drawWeight, bow);
 				
 				archPhoto.setArchery(archery);				
 			}

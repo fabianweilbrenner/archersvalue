@@ -32,10 +32,24 @@ CREATE TABLE photos (
 	competitionCategory int,
 	drawWeightValue int,
 	drawWeightUnit int,
+	bow integer,
 	status integer,
 	praise_sum integer,
 	no_votes integer,
 	creation_time bigint
+);
+
+CREATE TABLE bows (
+	id integer PRIMARY KEY,
+	bowType integer,
+	constructionYear integer
+);
+
+CREATE TABLE bowtypes (
+	id integer PRIMARY KEY,
+	manufacturer text,
+	riser text,
+	limbs text
 );
 
 CREATE TABLE tags (

@@ -1,8 +1,12 @@
 package org.wahlzeit.model.domain;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import org.wahlzeit.model.domain.DrawWeight.Units;
+import org.wahlzeit.model.domain.bow.Bow;
+import org.wahlzeit.model.domain.bow.BowType;
 
 public class ArcheryFactory {
 
@@ -56,13 +60,14 @@ public class ArcheryFactory {
 	 * @return Returns the new archery object
 	 * @methodtype factory
 	 */
-	public Archery createArcheryObject(BowCategory bowCategory, CompetitionCategory competitionCategory, DrawWeight drawWeight) {
+	public Archery createArcheryObject(BowCategory bowCategory, CompetitionCategory competitionCategory, DrawWeight drawWeight, Bow bow) {
 		//precondition
 		assert bowCategory != null;
 		assert competitionCategory != null;
 		assert drawWeight != null;
+		assert bow != null;
 
-		return new Archery(bowCategory, competitionCategory, drawWeight);
+		return new Archery(bowCategory, competitionCategory, drawWeight, bow);
 	}
 
 	/**
@@ -135,6 +140,22 @@ public class ArcheryFactory {
 		assert unit != null;
 
 		return getDrawWeightInstance(value, unit);
+	}
+	
+	public BowType createBowType(String manufacturer, String riser, String limbs) {
+		return new BowType(manufacturer, riser, limbs);
+	}
+	
+	public BowType createBowType(ResultSet rset) throws SQLException {
+		return new BowType(rset);
+	}
+	
+	public Bow createBow(BowType bowType, int constructionYear) {
+		return new Bow(bowType, constructionYear);
+	}
+	
+	public Bow createBow(ResultSet rset) throws SQLException {
+		return new Bow(rset);
 	}
 
 	/**

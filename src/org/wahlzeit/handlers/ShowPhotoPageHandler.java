@@ -174,6 +174,7 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
 			caption.addString(ArcheryPhoto.BOW_CATEGORY, archPhoto.getArchery().getBowCategory().getTypeName());
 			caption.addString(ArcheryPhoto.COMPETITION_CATEGORY, archPhoto.getArchery().getCompetitionCategory().getTypeName());
 			caption.addString(ArcheryPhoto.DRAW_WEIGHT, archPhoto.getArchery().getDrawWeight().asString());
+			caption.addString(ArcheryPhoto.BOW, archPhoto.getArchery().getBow().asString());
 		}
 		
 		page.addWritable(Photo.CAPTION, caption);
