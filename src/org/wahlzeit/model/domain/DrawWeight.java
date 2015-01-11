@@ -1,7 +1,9 @@
 package org.wahlzeit.model.domain;
 
 /**
+ * DrawWeight contains all information of the draw weight of a bow.
  * 
+ * @collaboration Archery, Factory
  * @author Fabian Weilbrenner
  *
  */

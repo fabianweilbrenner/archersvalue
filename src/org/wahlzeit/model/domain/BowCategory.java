@@ -2,7 +2,9 @@ package org.wahlzeit.model.domain;
 
 
 /**
+ * BowCategory contains all information of the category of a bow.
  * 
+ * @collaboration Archery, Factory, Value Object, Category
  * @author Fabian Weilbrenner
  *
  */

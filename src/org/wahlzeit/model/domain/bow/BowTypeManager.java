@@ -12,6 +12,13 @@ import org.wahlzeit.services.ObjectManager;
 import org.wahlzeit.services.Persistent;
 import org.wahlzeit.services.SysLog;
 
+/**
+ * BowTypeManager administrates {@link BowType} instances.
+ * 
+ * @collaboration Archery, Manager
+ * @author Fabian Weilbrenner
+ *
+ */
 public class BowTypeManager extends ObjectManager {
 
 	///////////////////////////////////

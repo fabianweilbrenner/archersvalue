@@ -2,6 +2,7 @@ package org.wahlzeit.model.location;
 
 /**
  * 
+ * @collaboration Location
  * @author Fabian Weilbrenner
  *
  */

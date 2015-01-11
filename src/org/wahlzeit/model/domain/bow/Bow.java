@@ -6,6 +6,13 @@ import java.sql.SQLException;
 
 import org.wahlzeit.services.DataObject;
 
+/**
+ * Bow contains all information of a bow.
+ * 
+ * @collaboration Archery, Manager, Factory, Type Object
+ * @author Fabian Weilbrenner
+ *
+ */
 public class Bow extends DataObject {
 
 	///////////////////////////////////

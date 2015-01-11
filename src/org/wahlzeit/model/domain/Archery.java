@@ -2,6 +2,13 @@ package org.wahlzeit.model.domain;
 
 import org.wahlzeit.model.domain.bow.Bow;
 
+/**
+ * This class wraps all specific domain classes for the {@link ArcheryPhoto}.
+ * 
+ * @collaboration Archery, ArcheryPhoto/Archery, Value Object, Factory 
+ * @author Fabian Weilbrenner
+ *
+ */
 public class Archery {
 
 

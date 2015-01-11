@@ -8,6 +8,7 @@ import com.mapcode.UnknownMapcodeException;
 
 /**
  * 
+ * @collaboration Location
  * @author Fabian Weilbrenner
  *
  */

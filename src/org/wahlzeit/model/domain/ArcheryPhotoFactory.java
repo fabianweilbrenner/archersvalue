@@ -9,7 +9,9 @@ import org.wahlzeit.model.PhotoId;
 import org.wahlzeit.services.SysLog;
 
 /**
+ * ArcheryPhotoFactory creates new instances of {@link ArcheryPhoto}.
  * 
+ * @collaboration Archery, Factory
  * @author Fabian Weilbrenner
  *
  */

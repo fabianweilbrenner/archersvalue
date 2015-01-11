@@ -8,6 +8,13 @@ import org.wahlzeit.model.domain.DrawWeight.Units;
 import org.wahlzeit.model.domain.bow.Bow;
 import org.wahlzeit.model.domain.bow.BowType;
 
+/**
+ * The ArcheryFactory class is responsible for creating instances of the archery domain classes.
+ * 
+ * @collaboration Factory
+ * @author Fabian Weilbrenner
+ *
+ */
 public class ArcheryFactory {
 
 	///////////////////////////////////

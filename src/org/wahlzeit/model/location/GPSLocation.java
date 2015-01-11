@@ -8,6 +8,7 @@ import com.mapcode.MapcodeCodec;
 
 /**
  * 
+ * @collaboration Location
  * @author Fabian Weilbrenner
  *
  */

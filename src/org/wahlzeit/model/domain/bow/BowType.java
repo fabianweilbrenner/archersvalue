@@ -6,6 +6,13 @@ import java.sql.SQLException;
 
 import org.wahlzeit.services.DataObject;
 
+/**
+ * BowType contains all information of a bow type.
+ * 
+ * @collaboration Archery, Manager, Factory, Type Object
+ * @author Fabian Weilbrenner
+ *
+ */
 public class BowType extends DataObject {
 
 	///////////////////////////////////

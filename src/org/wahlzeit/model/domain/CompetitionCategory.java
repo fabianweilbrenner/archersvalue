@@ -2,7 +2,9 @@ package org.wahlzeit.model.domain;
 
 
 /**
+ * CompetitionCategory contains all information of the archery competitions.
  * 
+ * @collaboration Archery, Factory, Value Object, Category
  * @author Fabian Weilbrenner
  *
  */

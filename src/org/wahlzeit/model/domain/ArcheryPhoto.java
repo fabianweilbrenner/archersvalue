@@ -9,7 +9,9 @@ import org.wahlzeit.model.domain.bow.Bow;
 import org.wahlzeit.model.domain.bow.BowManager;
 
 /**
+ * ArcheryPhoto expands the {@link Photo} class with archery domain values.
  * 
+ * @collaboration Archery, ArcheryPhoto/Archery, Factory
  * @author Fabian Weilbrenner
  *
  */
