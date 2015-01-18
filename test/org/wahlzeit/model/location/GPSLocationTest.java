@@ -14,109 +14,152 @@ public class GPSLocationTest extends TestCase {
 	}
 	
 	public void testHasComponents() {
-		GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
-		GPSLocation location2 = new GPSLocation("");
-		
-		assertTrue(location1.hasComponents());
-		assertFalse(location2.hasComponents());
+		try {
+			GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
+			//GPSLocation location2 = new GPSLocation("");
+			
+			assertTrue(location1.hasComponents());
+			//assertFalse(location2.hasComponents());
+		} catch(Exception e) {
+			fail("Exception occured");
+		}
 	}
 	
-	public void testGetComponents() {
-		GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
-		GPSLocation location2 = new GPSLocation("49.45052", "11.08048");
-		GPSLocation location3 = new GPSLocation(49.45052, 11.08048);
-		
-		assertEquals("49.45052", location1.getComponents()[0]);
-		assertEquals("11.08048", location1.getComponents()[1]);
-		
-		assertEquals("49.45052", location2.getComponents()[0]);
-		assertEquals("11.08048", location2.getComponents()[1]);
-		
-		assertEquals("49.45052", location3.getComponents()[0]);
-		assertEquals("11.08048", location3.getComponents()[1]);
+	public void testGetComponents() {	
+		try {
+			GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
+			GPSLocation location2 = new GPSLocation("49.45052", "11.08048");
+			GPSLocation location3 = new GPSLocation(49.45052, 11.08048);
+			
+			assertEquals("49.45052", location1.getComponents()[0]);
+			assertEquals("11.08048", location1.getComponents()[1]);
+			
+			assertEquals("49.45052", location2.getComponents()[0]);
+			assertEquals("11.08048", location2.getComponents()[1]);
+			
+			assertEquals("49.45052", location3.getComponents()[0]);
+			assertEquals("11.08048", location3.getComponents()[1]);
+		} catch(Exception e) {
+			fail("Exception occured");
+		}	
 	}
 	
 	public void testGetFirstComponent() {
-		GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
-		GPSLocation location2 = new GPSLocation("49.45052", "11.08048");
-		GPSLocation location3 = new GPSLocation(49.45052, 11.08048);
-		
-		assertEquals("49.45052", location1.getFirstComponent());
-		assertEquals("49.45052", location2.getFirstComponent());
-		assertEquals("49.45052", location3.getFirstComponent());
+		try {
+			GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
+			GPSLocation location2 = new GPSLocation("49.45052", "11.08048");
+			GPSLocation location3 = new GPSLocation(49.45052, 11.08048);
+			
+			assertEquals("49.45052", location1.getFirstComponent());
+			assertEquals("49.45052", location2.getFirstComponent());
+			assertEquals("49.45052", location3.getFirstComponent());
+		} catch(Exception e) {
+			fail("Exception occured");
+		}			
 	}
 	
 	public void testGetSecondComponent() {
-		GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
-		GPSLocation location2 = new GPSLocation("49.45052", "11.08048");
-		GPSLocation location3 = new GPSLocation(49.45052, 11.08048);
-		
-		assertEquals("11.08048", location1.getSecondComponent());
-		assertEquals("11.08048", location2.getSecondComponent());
-		assertEquals("11.08048", location3.getSecondComponent());
+		try {
+			GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
+			GPSLocation location2 = new GPSLocation("49.45052", "11.08048");
+			GPSLocation location3 = new GPSLocation(49.45052, 11.08048);
+			
+			assertEquals("11.08048", location1.getSecondComponent());
+			assertEquals("11.08048", location2.getSecondComponent());
+			assertEquals("11.08048", location3.getSecondComponent());
+		} catch(Exception e) {
+			fail("Exception occured");
+		}	
 	}
 	
 	public void testSetComponents() {
-		String firstComponent = "49.45052";
-		String secondComponent = "11.08048";
+		try {
+			String firstComponent = "49.45052";
+			String secondComponent = "11.08048";
+			
+			String wrongComponent = "24.948c";
+			
+			GPSLocation location1 = new GPSLocation("");
+			GPSLocation location2 = new GPSLocation("");
+			GPSLocation location3 = new GPSLocation("");
+			
+			location1.setComponents(firstComponent, secondComponent);
+			location2.setComponents(new String[] {firstComponent, secondComponent});
+			location3.setComponents(firstComponent, wrongComponent);
+			
+			assertEquals("49.45052", location1.getComponents()[0]);
+			assertEquals("11.08048", location1.getComponents()[1]);
+			
+			assertEquals("49.45052", location2.getComponents()[0]);
+			assertEquals("11.08048", location2.getComponents()[1]);
+			
+			assertEquals("", location3.getComponents()[0]);
+			assertEquals("", location3.getComponents()[1]);
+		} catch(Exception e) {
+			fail("Exception occured");
+		}	
 		
-		String wrongComponent = "24.948c";
-		
-		GPSLocation location1 = new GPSLocation("");
-		GPSLocation location2 = new GPSLocation("");
-		GPSLocation location3 = new GPSLocation("");
-		
-		location1.setComponents(firstComponent, secondComponent);
-		location2.setComponents(new String[] {firstComponent, secondComponent});
-		location3.setComponents(firstComponent, wrongComponent);
-		
-		assertEquals("49.45052", location1.getComponents()[0]);
-		assertEquals("11.08048", location1.getComponents()[1]);
-		
-		assertEquals("49.45052", location2.getComponents()[0]);
-		assertEquals("11.08048", location2.getComponents()[1]);
-		
-		assertEquals("", location3.getComponents()[0]);
-		assertEquals("", location3.getComponents()[1]);
 	}
 	
 	public void testHasContext() {
-		GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
+		try {
+			GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
+			
+			assertFalse(location1.hasContext());
+		} catch(Exception e) {
+			fail("Exception occured");
+		}
 		
-		assertFalse(location1.hasContext());
 	}
 	
 	public void testGetDelimiter() {
-		GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
-		
-		assertEquals(",", location1.getDelimiter());
+		try {
+			GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
+			
+			assertEquals(",", location1.getDelimiter());
+		} catch(Exception e) {
+			fail("Exception occured");
+		}
 	}
 	
 	public void testConvertTo() {
-		GPSLocation location1 = new GPSLocation("49.45052, 11.08048");	
-		
-		Location convertedLocation = location1.convertTo(MapcodeLocation.class);
-		
-		assertEquals("DEU QQH.MB", convertedLocation.asString());
+		try {
+			GPSLocation location1 = new GPSLocation("49.45052, 11.08048");	
+			
+			Location convertedLocation = location1.convertTo(MapcodeLocation.class);
+			
+			assertEquals("DEU QQH.MB", convertedLocation.asString());
+		} catch(Exception e) {
+			fail("Exception occured");
+		}
 	}
 	
 	public void testAsString() {
-		GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
-		GPSLocation location2 = new GPSLocation("49.45052", "11.08048");
-		GPSLocation location3 = new GPSLocation(49.45052, 11.08048);
-		
-		assertEquals("49.45052,11.08048", location1.asString());
-		assertEquals("49.45052,11.08048", location2.asString());
-		assertEquals("49.45052,11.08048", location3.asString());
+		try {
+			GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
+			GPSLocation location2 = new GPSLocation("49.45052", "11.08048");
+			GPSLocation location3 = new GPSLocation(49.45052, 11.08048);
+			
+			assertEquals("49.45052,11.08048", location1.asString());
+			assertEquals("49.45052,11.08048", location2.asString());
+			assertEquals("49.45052,11.08048", location3.asString());
+		} catch(Exception e) {
+			fail("Exception occured");
+		}		
 	}
 	
 	public void testIsEqual() {
-		GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
-		GPSLocation location2 = new GPSLocation("49.45052", "11.08048");
-		GPSLocation location3 = new GPSLocation("39.45052, 21.08048");
+		try {
+			GPSLocation location1 = new GPSLocation("49.45052, 11.08048");
+			GPSLocation location2 = new GPSLocation("49.45052", "11.08048");
+			GPSLocation location3 = new GPSLocation("39.45052, 21.08048");
+			
+			assertTrue(location1.isEqual(location2));
+			assertFalse(location1.isEqual(location3));
+		} catch(Exception e) {
+			fail("Exception occured");
+		}
 		
-		assertTrue(location1.isEqual(location2));
-		assertFalse(location1.isEqual(location3));
 		
 	}
 	

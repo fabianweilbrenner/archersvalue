@@ -28,33 +28,35 @@ public class MapcodeLocation extends AbstractLocation {
 	 * @methodtype constructor
 	 */
 	public MapcodeLocation(MapcodeLocation mapcodeLocation) {
-		this(new String(mapcodeLocation.getContext()), 
-			 new String(mapcodeLocation.getFirstComponent()), 
-			 new String(mapcodeLocation.getSecondComponent()));
+		setContext(mapcodeLocation.getContext());
+		doSetComponents(mapcodeLocation.getComponents());
 	}
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype constructor
 	 */
-	public MapcodeLocation(String mapcodeString) {
+	public MapcodeLocation(String mapcodeString) throws LocationException {
 		this();
 		parseLocationString(mapcodeString);
 	}
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype constructor
 	 */
-	public MapcodeLocation(String leftComponent, String rightComponent) {
+	public MapcodeLocation(String leftComponent, String rightComponent) throws LocationException {
 		this("", leftComponent, rightComponent);
 	}
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype constructor
 	 */
-	public MapcodeLocation(String context, String leftComponent, String rightComponent) {
+	public MapcodeLocation(String context, String leftComponent, String rightComponent) throws LocationException {
 		this();
 		setContext(context);
 		setComponents(leftComponent, rightComponent);
@@ -80,16 +82,17 @@ public class MapcodeLocation extends AbstractLocation {
 	@Override
 	protected void assertConvertTo(Class<? extends Location> classToConvert) throws Exception {
 		if (!Location.class.isAssignableFrom(classToConvert)) {
-			throw new Exception("Convertion Error");
+			throw new LocationException("Convertion Error");
 		}
 	}
 
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype conversion
 	 */
 	@Override
-	protected Location doConvertTo(Class<? extends Location> classToConvert) {
+	protected Location doConvertTo(Class<? extends Location> classToConvert) throws LocationException {
 		Location convertedLocation = null;
 
 		if (classToConvert.equals(GPSLocation.class)) {
@@ -97,7 +100,7 @@ public class MapcodeLocation extends AbstractLocation {
 				Point p = MapcodeCodec.decode(asString());
 				convertedLocation = new GPSLocation(p.getLatDeg(), p.getLonDeg());
 			} catch (IllegalArgumentException | UnknownMapcodeException e) {
-				//e.printStackTrace();
+				throw new LocationException("Convertion Error", e);
 			}
 		} else if (classToConvert.equals(MapcodeLocation.class)) {
 			convertedLocation = new MapcodeLocation(this);
@@ -108,10 +111,11 @@ public class MapcodeLocation extends AbstractLocation {
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype command
 	 */
 	@Override
-	protected void parseLocationString(String locationString) {
+	protected void parseLocationString(String locationString) throws LocationException {
 		StringTokenizer strTokenizer = new StringTokenizer(locationString, " ");		
 		String components = "";
 		
@@ -136,7 +140,7 @@ public class MapcodeLocation extends AbstractLocation {
 	 * @methodtype boolean query
 	 */
 	@Override
-	protected boolean areValidComponents(String[] components) {
+	protected boolean assertSetComponents(String[] components) {
 		return true;
 	}
 

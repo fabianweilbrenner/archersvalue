@@ -545,7 +545,13 @@ public abstract class AbstractModelConfig extends AbstractConfig implements Mode
 	public String getPhotoUploadSucceeded() { 
 		return doGetValue("PhotoUploadSucceeded"); 
 	}
-
+	
+	/**
+	 * 
+	 */
+	public String getPhotoUploadLocationFailed() {
+		return doGetValue("PhotoUploadLocationError");
+	}
 	/**
 	 * 
 	 */

@@ -40,21 +40,24 @@ public abstract class AbstractLocation implements Location {
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype conversion
 	 */
-	protected abstract Location doConvertTo(Class<? extends Location> classToConvert);
+	protected abstract Location doConvertTo(Class<? extends Location> classToConvert) throws LocationException;
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype command
 	 */
-	protected abstract void parseLocationString(String locationString);
+	protected abstract void parseLocationString(String locationString) throws LocationException;
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype boolean query
 	 */
-	protected abstract boolean areValidComponents(String[] components);
+	protected abstract boolean assertSetComponents(String[] components) throws LocationException;
 	
 	/**
 	 * 
@@ -90,23 +93,27 @@ public abstract class AbstractLocation implements Location {
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype set
 	 */
-	public void setComponents(String[] components) {
-		if(components.length == 2 && areValidComponents(components)) {
-			this.components = components;
+	public void setComponents(String[] components) throws LocationException {
+		if(components.length == 2 && assertSetComponents(components)) {
+			doSetComponents(components);
 		}		
+	}
+	
+	protected void doSetComponents(String[] components) {
+		this.components = components;
 	}
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype set
 	 */
-	public void setComponents(String leftComponent, String rightComponent) {
+	public void setComponents(String leftComponent, String rightComponent) throws LocationException {
 		String[] components = new String[] { leftComponent, rightComponent };
-		if(areValidComponents(components)) {
-			this.components = components;
-		}
+		setComponents(components);
 	}
 	
 	/**
@@ -151,16 +158,16 @@ public abstract class AbstractLocation implements Location {
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype get
 	 */
-	public Location convertTo(Class<? extends Location> classToConvert) {
+	public Location convertTo(Class<? extends Location> classToConvert) throws LocationException {
 		try {
 			assertConvertTo(classToConvert);
 			return doConvertTo(classToConvert);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new LocationException(e);
 		}
-		return null;
 	}
 	
 	/**

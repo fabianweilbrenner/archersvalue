@@ -28,15 +28,15 @@ public class GPSLocation extends AbstractLocation {
 	 * @methodtype constructor
 	 */
 	public GPSLocation(GPSLocation gpsLocation) {
-		this(new String(gpsLocation.getFirstComponent()),
-			 new String(gpsLocation.getSecondComponent()));
+		doSetComponents(gpsLocation.getComponents());
 	}
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype constructor
 	 */
-	public GPSLocation(String gpsString) {
+	public GPSLocation(String gpsString) throws LocationException {
 		this();
 		parseLocationString(gpsString);
 	}
@@ -46,16 +46,18 @@ public class GPSLocation extends AbstractLocation {
 	 * @methodtype constructor
 	 */
 	public GPSLocation(double latitude, double longitude) {
-		this(""+latitude, ""+longitude);
+		doSetComponents(new String[] { ""+latitude, ""+longitude });
 	}
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype constructor
 	 */
-	public GPSLocation(String latitude, String longitude) {
+	public GPSLocation(String latitude, String longitude) throws LocationException {
 		this();
 		setComponents(latitude, longitude);
+		
 	}
 	
 	/**
@@ -78,16 +80,17 @@ public class GPSLocation extends AbstractLocation {
 	@Override
 	protected void assertConvertTo(Class<? extends Location> classToConvert) throws Exception {
 		if (!Location.class.isAssignableFrom(classToConvert)) {
-			throw new Exception("Convertion Error");
+			throw new LocationException("Convertion Error");
 		}
 	}
 
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype convertion
 	 */
 	@Override
-	protected Location doConvertTo(Class<? extends Location> classToConvert) {
+	protected Location doConvertTo(Class<? extends Location> classToConvert) throws LocationException {
 		Location convertedLocation = null;
 		
 		if(classToConvert.equals(GPSLocation.class)) {
@@ -106,30 +109,34 @@ public class GPSLocation extends AbstractLocation {
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype command
 	 */
 	@Override
-	protected void parseLocationString(String locationString) {
+	protected void parseLocationString(String locationString) throws LocationException {
 		StringTokenizer strTokenizer = new StringTokenizer(locationString, GPS_DELIMITER);
 		
 		if(strTokenizer.countTokens() == 2) {
 			String latitude = strTokenizer.nextToken().trim();
 			String longitude = strTokenizer.nextToken().trim();
 			setComponents(latitude, longitude);
+		} else {
+			throw new LocationException("Could not parse the string into the GPS components.");
 		}
 	}
 	
 	/**
 	 * 
+	 * @throws LocationException 
 	 * @methodtype boolean query
 	 */
 	@Override
-	protected boolean areValidComponents(String[] components) {
+	protected boolean assertSetComponents(String[] components) throws LocationException {
 		try {
 			Double.parseDouble(components[0]);
 			Double.parseDouble(components[1]);
 		} catch(Exception e) {
-			return false;
+			throw new LocationException("Invalid GPS components");
 		}
 		return true;
 	}

@@ -35,6 +35,7 @@ import org.wahlzeit.model.domain.bow.BowManager;
 import org.wahlzeit.model.domain.bow.BowType;
 import org.wahlzeit.model.domain.bow.BowTypeManager;
 import org.wahlzeit.model.location.GPSLocation;
+import org.wahlzeit.model.location.LocationException;
 import org.wahlzeit.model.location.MapcodeLocation;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
@@ -132,7 +133,7 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 				} else if(locationType.equals("MAPCODE")) {
 					photo.setLocation(new MapcodeLocation(locationString));
 				}
-			}			
+			}	
 
 			pm.savePhoto(photo);
 
@@ -141,6 +142,9 @@ public class UploadPhotoFormHandler extends AbstractWebFormHandler {
 			UserLog.log(sb);
 			
 			us.setTwoLineMessage(us.cfg().getPhotoUploadSucceeded(), us.cfg().getKeepGoing());
+		} catch(LocationException locEx) {
+			SysLog.logThrowable(locEx);
+			us.setMessage(us.cfg().getPhotoUploadLocationFailed());
 		} catch (Exception ex) {
 			SysLog.logThrowable(ex);
 			us.setMessage(us.cfg().getPhotoUploadFailed());
