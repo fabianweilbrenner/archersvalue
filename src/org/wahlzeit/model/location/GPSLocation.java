@@ -46,6 +46,7 @@ public class GPSLocation extends AbstractLocation {
 	 * @methodtype constructor
 	 */
 	public GPSLocation(double latitude, double longitude) {
+		this();
 		doSetComponents(new String[] { ""+latitude, ""+longitude });
 	}
 	

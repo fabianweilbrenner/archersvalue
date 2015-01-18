@@ -77,15 +77,11 @@ public class GPSLocationTest extends TestCase {
 			String firstComponent = "49.45052";
 			String secondComponent = "11.08048";
 			
-			String wrongComponent = "24.948c";
-			
-			GPSLocation location1 = new GPSLocation("");
-			GPSLocation location2 = new GPSLocation("");
-			GPSLocation location3 = new GPSLocation("");
+			GPSLocation location1 = new GPSLocation("20.1344, 34.28239");
+			GPSLocation location2 = new GPSLocation("20.1344, 34.28239");
 			
 			location1.setComponents(firstComponent, secondComponent);
 			location2.setComponents(new String[] {firstComponent, secondComponent});
-			location3.setComponents(firstComponent, wrongComponent);
 			
 			assertEquals("49.45052", location1.getComponents()[0]);
 			assertEquals("11.08048", location1.getComponents()[1]);
@@ -93,12 +89,25 @@ public class GPSLocationTest extends TestCase {
 			assertEquals("49.45052", location2.getComponents()[0]);
 			assertEquals("11.08048", location2.getComponents()[1]);
 			
-			assertEquals("", location3.getComponents()[0]);
-			assertEquals("", location3.getComponents()[1]);
 		} catch(Exception e) {
 			fail("Exception occured");
 		}	
 		
+	}
+	
+	public void testSetComponentsWithInvalidValues() {
+		try {
+			String firstComponent = "49.45052";
+			String wrongComponent = "24.948c";
+			
+			GPSLocation location = new GPSLocation("20.1344, 34.28239");
+			
+			location.setComponents(firstComponent, wrongComponent);
+			
+			fail();
+		} catch(LocationException e) {
+			// expected
+		}
 	}
 	
 	public void testHasContext() {
