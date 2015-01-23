@@ -1,4 +1,4 @@
-package org.wahlzeit.model.domain.bow;
+package de.weilbrenner.archersvalue.bow;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,10 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.wahlzeit.main.ServiceMain;
-import org.wahlzeit.model.domain.ArcheryFactory;
 import org.wahlzeit.services.ObjectManager;
 import org.wahlzeit.services.Persistent;
 import org.wahlzeit.services.SysLog;
+
+import de.weilbrenner.archersvalue.ArcheryFactory;
 
 /**
  * BowManager administrates {@link Bow} instances.

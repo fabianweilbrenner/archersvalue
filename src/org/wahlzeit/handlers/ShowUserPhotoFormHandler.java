@@ -23,11 +23,12 @@ package org.wahlzeit.handlers;
 import java.util.*;
 
 import org.wahlzeit.model.*;
-import org.wahlzeit.model.domain.ArcheryPhoto;
-import org.wahlzeit.model.location.Location;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 import org.wahlzeit.webparts.*;
+
+import de.weilbrenner.archersvalue.ArcheryPhoto;
+import de.weilbrenner.archersvalue.location.Location;
 
 /**
  * 

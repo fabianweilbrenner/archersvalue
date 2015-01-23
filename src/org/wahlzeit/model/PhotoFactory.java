@@ -22,8 +22,9 @@ package org.wahlzeit.model;
 
 import java.sql.*;
 
-import org.wahlzeit.model.domain.ArcheryPhoto;
 import org.wahlzeit.services.*;
+
+import de.weilbrenner.archersvalue.ArcheryPhoto;
 
 /**
  * 

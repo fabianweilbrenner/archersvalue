@@ -1,12 +1,13 @@
-package org.wahlzeit.model.domain;
+package de.weilbrenner.archersvalue;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import org.wahlzeit.model.domain.DrawWeight.Units;
-import org.wahlzeit.model.domain.bow.Bow;
-import org.wahlzeit.model.domain.bow.BowType;
+
+import de.weilbrenner.archersvalue.DrawWeight.Units;
+import de.weilbrenner.archersvalue.bow.Bow;
+import de.weilbrenner.archersvalue.bow.BowType;
 
 /**
  * The ArcheryFactory class is responsible for creating instances of the archery domain classes.

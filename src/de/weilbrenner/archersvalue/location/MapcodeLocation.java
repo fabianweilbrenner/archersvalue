@@ -1,4 +1,4 @@
-package org.wahlzeit.model.location;
+package de.weilbrenner.archersvalue.location;
 
 import java.util.StringTokenizer;
 

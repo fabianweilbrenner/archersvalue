@@ -23,12 +23,13 @@ package org.wahlzeit.model;
 import java.sql.*;
 import java.net.*;
 
-import org.wahlzeit.model.location.GPSLocation;
-import org.wahlzeit.model.location.Location;
-import org.wahlzeit.model.location.LocationException;
-import org.wahlzeit.model.location.MapcodeLocation;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
+
+import de.weilbrenner.archersvalue.location.GPSLocation;
+import de.weilbrenner.archersvalue.location.Location;
+import de.weilbrenner.archersvalue.location.LocationException;
+import de.weilbrenner.archersvalue.location.MapcodeLocation;
 
 /**
  * A photo represents a user-provided (uploaded) photo.

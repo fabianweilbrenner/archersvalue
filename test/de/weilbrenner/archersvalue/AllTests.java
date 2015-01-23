@@ -1,4 +1,4 @@
-package org.wahlzeit.model.domain;
+package de.weilbrenner.archersvalue;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

@@ -1,4 +1,4 @@
-package org.wahlzeit.model.domain;
+package de.weilbrenner.archersvalue;
 
 
 /**

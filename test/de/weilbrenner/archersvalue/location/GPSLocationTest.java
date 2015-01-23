@@ -1,5 +1,9 @@
-package org.wahlzeit.model.location;
+package de.weilbrenner.archersvalue.location;
 
+import de.weilbrenner.archersvalue.location.GPSLocation;
+import de.weilbrenner.archersvalue.location.Location;
+import de.weilbrenner.archersvalue.location.LocationException;
+import de.weilbrenner.archersvalue.location.MapcodeLocation;
 import junit.framework.TestCase;
 
 /**

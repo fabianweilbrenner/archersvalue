@@ -1,6 +1,6 @@
-package org.wahlzeit.model.domain;
+package de.weilbrenner.archersvalue;
 
-import org.wahlzeit.model.domain.bow.Bow;
+import de.weilbrenner.archersvalue.bow.Bow;
 
 /**
  * This class wraps all specific domain classes for the {@link ArcheryPhoto}.

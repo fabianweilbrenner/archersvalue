@@ -25,8 +25,9 @@ import java.awt.*;
 import java.awt.image.*;
 import javax.imageio.*;
 
-import org.wahlzeit.model.domain.ArcheryPhotoFactory;
 import org.wahlzeit.services.*;
+
+import de.weilbrenner.archersvalue.ArcheryPhotoFactory;
 
 /**
  * PhotoUtil provides a set of utility functions to create defined images.

@@ -39,8 +39,8 @@ public class AllTests extends TestSuite {
 		suite.addTest(org.wahlzeit.services.AllTests.suite());		
 		suite.addTest(org.wahlzeit.model.AllTests.suite());
 		suite.addTest(org.wahlzeit.utils.AllTests.suite());
-		suite.addTest(org.wahlzeit.model.location.AllTests.suite());
-		suite.addTest(org.wahlzeit.model.domain.AllTests.suite());
+		suite.addTest(de.weilbrenner.archersvalue.location.AllTests.suite());
+		suite.addTest(de.weilbrenner.archersvalue.AllTests.suite());
 		
 		return new WahlzeitTestSetup(suite);
 	}

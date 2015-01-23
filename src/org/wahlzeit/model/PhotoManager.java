@@ -25,8 +25,9 @@ import java.sql.*;
 import java.util.*;
 
 import org.wahlzeit.main.*;
-import org.wahlzeit.model.domain.ArcheryPhotoFactory;
 import org.wahlzeit.services.*;
+
+import de.weilbrenner.archersvalue.ArcheryPhotoFactory;
 
 /**
  * A photo manager provides access to and manages photos.

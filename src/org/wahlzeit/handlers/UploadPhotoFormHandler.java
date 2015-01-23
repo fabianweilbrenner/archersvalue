@@ -24,22 +24,23 @@ import java.util.*;
 import java.io.*;
 
 import org.wahlzeit.model.*;
-import org.wahlzeit.model.domain.Archery;
-import org.wahlzeit.model.domain.ArcheryFactory;
-import org.wahlzeit.model.domain.ArcheryPhoto;
-import org.wahlzeit.model.domain.BowCategory;
-import org.wahlzeit.model.domain.CompetitionCategory;
-import org.wahlzeit.model.domain.DrawWeight;
-import org.wahlzeit.model.domain.bow.Bow;
-import org.wahlzeit.model.domain.bow.BowManager;
-import org.wahlzeit.model.domain.bow.BowType;
-import org.wahlzeit.model.domain.bow.BowTypeManager;
-import org.wahlzeit.model.location.GPSLocation;
-import org.wahlzeit.model.location.LocationException;
-import org.wahlzeit.model.location.MapcodeLocation;
 import org.wahlzeit.services.*;
 import org.wahlzeit.utils.*;
 import org.wahlzeit.webparts.*;
+
+import de.weilbrenner.archersvalue.Archery;
+import de.weilbrenner.archersvalue.ArcheryFactory;
+import de.weilbrenner.archersvalue.ArcheryPhoto;
+import de.weilbrenner.archersvalue.BowCategory;
+import de.weilbrenner.archersvalue.CompetitionCategory;
+import de.weilbrenner.archersvalue.DrawWeight;
+import de.weilbrenner.archersvalue.bow.Bow;
+import de.weilbrenner.archersvalue.bow.BowManager;
+import de.weilbrenner.archersvalue.bow.BowType;
+import de.weilbrenner.archersvalue.bow.BowTypeManager;
+import de.weilbrenner.archersvalue.location.GPSLocation;
+import de.weilbrenner.archersvalue.location.LocationException;
+import de.weilbrenner.archersvalue.location.MapcodeLocation;
 
 /**
  * 

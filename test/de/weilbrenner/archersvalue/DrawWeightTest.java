@@ -1,5 +1,6 @@
-package org.wahlzeit.model.domain;
+package de.weilbrenner.archersvalue;
 
+import de.weilbrenner.archersvalue.DrawWeight;
 import junit.framework.TestCase;
 
 public class DrawWeightTest extends TestCase {

@@ -1,4 +1,4 @@
-package org.wahlzeit.model.domain.bow;
+package de.weilbrenner.archersvalue.bow;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

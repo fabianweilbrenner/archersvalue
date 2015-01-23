@@ -1,12 +1,13 @@
-package org.wahlzeit.model.domain;
+package de.weilbrenner.archersvalue;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.wahlzeit.model.Photo;
 import org.wahlzeit.model.PhotoId;
-import org.wahlzeit.model.domain.bow.Bow;
-import org.wahlzeit.model.domain.bow.BowManager;
+
+import de.weilbrenner.archersvalue.bow.Bow;
+import de.weilbrenner.archersvalue.bow.BowManager;
 
 /**
  * ArcheryPhoto expands the {@link Photo} class with archery domain values.

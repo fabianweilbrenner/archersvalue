@@ -1,5 +1,6 @@
-package org.wahlzeit.model.domain;
+package de.weilbrenner.archersvalue;
 
+import de.weilbrenner.archersvalue.CompetitionCategory;
 import junit.framework.TestCase;
 
 public class CompetitionCategoryTest extends TestCase {
